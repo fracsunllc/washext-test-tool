@@ -1,0 +1,413 @@
+/* ============================================================
+   Wash Extension Test Tool — Styles
+   ============================================================ */
+
+:root {
+  --bg: #0f1117;
+  --bg2: #1a1d27;
+  --bg3: #22263a;
+  --card-bg: #1e2133;
+  --border: #2e3350;
+  --accent: #3b8bff;
+  --accent-hover: #5aa0ff;
+  --green: #22c55e;
+  --yellow: #eab308;
+  --red: #ef4444;
+  --text: #e2e8f0;
+  --text-muted: #718096;
+  --text-dim: #4a5568;
+  --warning-bg: rgba(234, 179, 8, 0.12);
+  --error-bg: rgba(239, 68, 68, 0.12);
+  --font: 'Segoe UI', system-ui, sans-serif;
+  --mono: 'Consolas', 'Courier New', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+header h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.connection-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+.connection-bar select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+/* ─── Buttons ─────────────────────────────────────────────── */
+.btn {
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.35rem 0.9rem;
+  transition: background 0.15s, opacity 0.15s;
+  white-space: nowrap;
+}
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-connect  { background: var(--accent); color: #fff; }
+.btn-connect:hover:not(:disabled) { background: var(--accent-hover); }
+.btn-connect.connected { background: var(--red); }
+.btn-secondary { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover:not(:disabled) { background: var(--border); }
+.btn-pump { background: var(--green); color: #fff; margin-top: 0.75rem; width: 100%; }
+.btn-pump:hover:not(:disabled) { filter: brightness(1.1); }
+.btn-pump:disabled { background: var(--bg3); }
+.btn-cfg  { background: var(--accent); color: #fff; }
+.btn-cfg:hover:not(:disabled) { background: var(--accent-hover); }
+.btn-danger { background: var(--red); color: #fff; }
+.btn-danger:hover:not(:disabled) { filter: brightness(1.1); }
+
+/* ─── Status Badge ────────────────────────────────────────── */
+.status-badge {
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.75rem;
+  text-transform: uppercase;
+}
+.status-badge.disconnected  { background: var(--bg3); color: var(--text-muted); }
+.status-badge.connected     { background: rgba(34,197,94,0.15); color: var(--green); }
+.status-badge.reconnecting  { background: rgba(234,179,8,0.15); color: var(--yellow); }
+
+/* ─── Tabs ────────────────────────────────────────────────── */
+.tab-bar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 0;
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.65rem 1.4rem;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { border-bottom-color: var(--accent); color: var(--accent); }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ─── Dashboard Grid ──────────────────────────────────────── */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  position: relative;
+}
+.card-wide { grid-column: span 2; }
+@media (max-width: 680px) { .card-wide { grid-column: span 1; } }
+
+.card-title {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+/* ─── Info Grid ───────────────────────────────────────────── */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+}
+.info-item { display: flex; flex-direction: column; gap: 0.1rem; }
+.info-label { color: var(--text-muted); font-size: 0.72rem; }
+.info-value { color: var(--text); font-size: 0.95rem; font-weight: 500; }
+.info-value.mono { font-family: var(--mono); font-size: 0.8rem; word-break: break-all; }
+
+/* ─── Gauge ───────────────────────────────────────────────── */
+.gauge-value {
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 0.1rem;
+}
+.gauge-unit {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+.sub-value { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+/* ─── Status Indicator (text) ─────────────────────────────── */
+.status-indicator {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+  min-height: 1.1em;
+}
+.status-indicator.ok     { color: var(--green); }
+.status-indicator.warn   { color: var(--yellow); }
+.status-indicator.error  { color: var(--red); }
+
+/* ─── Battery Bar ─────────────────────────────────────────── */
+.battery-bar-wrap {
+  background: var(--bg3);
+  border-radius: 4px;
+  height: 8px;
+  margin-top: 0.6rem;
+  overflow: hidden;
+  width: 100%;
+}
+.battery-bar {
+  background: var(--green);
+  border-radius: 4px;
+  height: 100%;
+  transition: width 0.4s, background 0.4s;
+  width: 0%;
+}
+
+/* ─── Liquid Level Sensor ─────────────────────────────────── */
+.lls-indicator {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.lls-dot {
+  border-radius: 50%;
+  height: 14px;
+  width: 14px;
+  background: var(--text-dim);
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+.lls-dot.water { background: var(--accent); }
+.lls-dot.air   { background: var(--yellow); }
+
+/* ─── Pump Status ─────────────────────────────────────────── */
+.pump-status {
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.4rem 0.75rem;
+  text-align: center;
+  background: var(--bg3);
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+  transition: background 0.3s, color 0.3s;
+}
+.pump-status.running { background: rgba(34,197,94,0.2); color: var(--green); }
+
+/* ─── Events List ─────────────────────────────────────────── */
+.event-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.event-list li {
+  background: var(--bg3);
+  border-radius: 4px;
+  font-size: 0.78rem;
+  padding: 0.2rem 0.5rem;
+  color: var(--text-muted);
+}
+.event-list li.event-warn  { background: var(--warning-bg); color: var(--yellow); }
+.event-list li.event-error { background: var(--error-bg);   color: var(--red); }
+
+/* ─── Log Tab ─────────────────────────────────────────────── */
+.log-toolbar {
+  align-items: center;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  flex-wrap: wrap;
+}
+.checkbox-label {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  user-select: none;
+}
+.log-container {
+  background: #0a0c12;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  height: calc(100vh - 160px);
+  line-height: 1.5;
+  overflow-y: auto;
+  padding: 0.5rem 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.log-line { display: block; padding: 0.05rem 0; }
+.log-line.level-warn  { color: var(--yellow); background: var(--warning-bg); }
+.log-line.level-error { color: var(--red);    background: var(--error-bg); }
+.log-line.level-info  { color: #a0aec0; }
+.log-line .ts   { color: var(--text-dim); margin-right: 0.4rem; }
+.log-line .cat  { color: #68d391; margin-right: 0.4rem; }
+.log-line .lvl  { margin-right: 0.4rem; font-weight: 600; }
+
+/* ─── Config Tab ──────────────────────────────────────────── */
+#tab-config {
+  padding: 1rem;
+  display: none;
+}
+#tab-config.active { display: block; }
+.config-note {
+  background: var(--bg3);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  margin-bottom: 1.25rem;
+  padding: 0.5rem 0.75rem;
+}
+.config-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 1rem 1.1rem;
+}
+.config-section h2 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.menu-key {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  padding: 0.1rem 0.4rem;
+}
+.config-grid { display: flex; flex-direction: column; gap: 0.65rem; }
+.config-row {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.config-row > label {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  min-width: 200px;
+  padding-top: 0.35rem;
+}
+.config-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.config-datetime { flex-wrap: wrap; }
+.config-section input[type="number"],
+.config-section input[type="text"],
+.config-section select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 0.85rem;
+  padding: 0.3rem 0.5rem;
+  width: 140px;
+}
+.config-section input[type="text"] { width: 220px; }
+.config-console {
+  height: 200px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+/* ─── Value flash animation ───────────────────────────────── */
+@keyframes value-flash {
+  0%   { color: #22e5e5; }
+  100% { color: inherit; }
+}
+.value-flash {
+  animation: value-flash 250ms ease-out;
+}
+
+/* ─── Config Section Status ───────────────────────────────── */
+.cfg-status {
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 0.65rem;
+  min-height: 1.3em;
+  padding: 0.3rem 0.65rem;
+}
+.cfg-status:empty { display: none; }
+.cfg-status.sending {
+  background: rgba(234, 179, 8, 0.12);
+  color: var(--yellow);
+}
+.cfg-status.success {
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--green);
+}
+.cfg-status.failed {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--red);
+}

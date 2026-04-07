@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wash Extension Config and Test Tool</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>Wash Extension Config and Test Tool</h1>
+      <div class="connection-bar">
+        <select id="baudSelect">
+          <option value="115200">115200 baud</option>
+          <option value="9600" selected>9600 baud</option>
+          <option value="19200">19200 baud</option>
+          <option value="38400">38400 baud</option>
+          <option value="57600">57600 baud</option>
+        </select>
+        <button id="connectBtn" class="btn btn-connect">Connect Serial Port</button>
+        <span id="connectionStatus" class="status-badge disconnected">Disconnected</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+    <button class="tab-btn" data-tab="log">Live Log</button>
+    <button class="tab-btn" data-tab="config">Configuration</button>
+  </div>
+
+  <!-- ===== DASHBOARD TAB ===== -->
+  <div id="tab-dashboard" class="tab-content active">
+    <div class="dashboard-grid">
+
+      <!-- Device Info -->
+      <div class="card card-wide">
+        <div class="card-title">Device Info</div>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Firmware Rev</span>
+            <span class="info-value" id="d-firmware">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Release Date</span>
+            <span class="info-value" id="d-releaseDate">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Board / Revision</span>
+            <span class="info-value" id="d-board">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Device ID</span>
+            <span class="info-value mono" id="d-deviceId">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Serial Number</span>
+            <span class="info-value" id="d-serialNum">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">EEPROM Ver</span>
+            <span class="info-value" id="d-eepromVer">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label"># Washes</span>
+            <span class="info-value" id="d-washes">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label"># Modbus Fails</span>
+            <span class="info-value" id="d-modbusFails">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">WiFi Mode</span>
+            <span class="info-value" id="d-wifi">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Wash Hours</span>
+            <span class="info-value" id="d-washHours">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Wash Duration</span>
+            <span class="info-value" id="d-washSecs">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Freeze Threshold</span>
+            <span class="info-value" id="d-freezeThresh">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Next Wash In</span>
+            <span class="info-value" id="d-nextWash">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Temperature -->
+      <div class="card">
+        <div class="card-title">Temperature</div>
+        <div class="gauge-value" id="d-temp">—</div>
+        <div class="gauge-unit">°C</div>
+        <div class="sub-value">Avg: <span id="d-tempAvg">—</span> °C</div>
+        <div class="status-indicator" id="d-tempStatus"></div>
+      </div>
+
+      <!-- Humidity -->
+      <div class="card">
+        <div class="card-title">Humidity</div>
+        <div class="gauge-value" id="d-humidity">—</div>
+        <div class="gauge-unit">%</div>
+        <div class="sub-value">Avg: <span id="d-humidityAvg">—</span> %</div>
+      </div>
+
+      <!-- Battery -->
+      <div class="card">
+        <div class="card-title">Battery Voltage</div>
+        <div class="gauge-value" id="d-battery">—</div>
+        <div class="gauge-unit">V</div>
+        <div class="status-indicator" id="d-batteryStatus"></div>
+        <div class="battery-bar-wrap"><div class="battery-bar" id="d-batteryBar"></div></div>
+      </div>
+
+      <!-- Liquid Level Sensor -->
+      <div class="card">
+        <div class="card-title">Liquid Level Sensor</div>
+        <div class="gauge-value" id="d-lls">—</div>
+        <div class="gauge-unit">V</div>
+        <div class="sub-value">Avg: <span id="d-llsAvg">—</span> V</div>
+        <div class="lls-indicator">
+          <div class="lls-dot" id="d-llsDot"></div>
+          <span id="d-llsLabel">—</span>
+        </div>
+        <div class="sub-value">Output Type: <span id="d-llsType">—</span></div>
+      </div>
+
+      <!-- Pump / Wash -->
+      <div class="card">
+        <div class="card-title">Pump / Wash</div>
+        <div class="pump-status" id="d-pumpStatus">IDLE</div>
+        <div class="info-grid" style="margin-top:0.75rem;">
+          <div class="info-item">
+            <span class="info-label">Motor Voltage</span>
+            <span class="info-value" id="d-pumpVoltage">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Motor Current</span>
+            <span class="info-value" id="d-pumpCurrent">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Motor Power</span>
+            <span class="info-value" id="d-pumpPower">—</span>
+          </div>
+        </div>
+        <button class="btn btn-pump" id="runWashBtn" title="Sends 'g' to trigger pump and get measurement">Run Pump (g)</button>
+      </div>
+
+      <!-- Modbus -->
+      <div class="card">
+        <div class="card-title">Modbus</div>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Slave Mode</span>
+            <span class="info-value" id="d-mbSlave">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Address</span>
+            <span class="info-value" id="d-mbAddr">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Baud Rate</span>
+            <span class="info-value" id="d-mbBaud">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Config</span>
+            <span class="info-value" id="d-mbConfig">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">ARES Poll Status</span>
+            <span class="info-value" id="d-aresPollStatus">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">ARES Poll Time</span>
+            <span class="info-value" id="d-aresPoll">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Last ARES Sync</span>
+            <span class="info-value" id="d-aresSync">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Schedule -->
+      <div class="card">
+        <div class="card-title">Schedule / RTC</div>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">RTC</span>
+            <span class="info-value" id="d-rtc">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">RTC Time</span>
+            <span class="info-value" id="d-rtcTime">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Timezone</span>
+            <span class="info-value" id="d-tz">—</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Schedule State</span>
+            <span class="info-value" id="d-schedState">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- System Events -->
+      <div class="card">
+        <div class="card-title">System Events</div>
+        <ul class="event-list" id="d-events"></ul>
+      </div>
+
+    </div><!-- end dashboard-grid -->
+  </div><!-- end tab-dashboard -->
+
+  <!-- ===== LOG TAB ===== -->
+  <div id="tab-log" class="tab-content">
+    <div class="log-toolbar">
+      <label class="checkbox-label">
+        <input type="checkbox" id="autoScrollCheck" checked /> Auto-scroll
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" id="warnOnlyCheck" /> Warnings &amp; Errors only
+      </label>
+      <button class="btn btn-secondary" id="clearLogBtn">Clear Log</button>
+      <button class="btn btn-secondary" id="exportLogBtn">Export Log</button>
+    </div>
+    <div class="log-container" id="logContainer"></div>
+  </div>
+
+  <!-- ===== CONFIG TAB ===== -->
+  <div id="tab-config" class="tab-content">
+    <p class="config-note">
+      Select a menu below. Commands are sent directly over the open serial port.
+      A serial connection must be active to use these controls.
+    </p>
+
+    <!-- Modbus Menu (m) -->
+    <section class="config-section">
+      <h2>Modbus Settings <span class="menu-key">key: m</span></h2>
+      <div class="config-grid">
+        <div class="config-row">
+          <label>Slave Mode</label>
+          <div class="config-actions">
+            <button class="btn btn-cfg" data-cmd="m2" data-confirm="Turn ON Slave Mode?">Turn ON Slave Mode</button>
+            <button class="btn btn-cfg" data-cmd="m3" data-confirm="Turn OFF Slave Mode?">Turn OFF Slave Mode</button>
+          </div>
+        </div>
+        <div class="config-row">
+          <label>Slave Address (1–255)</label>
+          <div class="config-actions">
+            <input type="number" id="cfg-mbAddr" min="1" max="255" placeholder="e.g. 43" />
+            <button class="btn btn-cfg" id="cfg-setMbAddr">Set Address</button>
+          </div>
+        </div>
+        <div class="config-row">
+          <label>Baud Rate</label>
+          <div class="config-actions">
+            <select id="cfg-mbBaud">
+              <option value="4800">4800</option>
+              <option value="9600">9600</option>
+              <option value="19200" selected>19200</option>
+              <option value="38400">38400</option>
+            </select>
+            <button class="btn btn-cfg" id="cfg-setMbBaud">Set Baud Rate</button>
+          </div>
+        </div>
+        <div class="config-row">
+          <label>Serial Config</label>
+          <div class="config-actions">
+            <select id="cfg-mbSerial">
+              <option value="0">0 — 8, None, 1</option>
+              <option value="4" selected>4 — 8, Even, 1 (default)</option>
+            </select>
+            <button class="btn btn-cfg" id="cfg-setMbSerial">Set Config</button>
+          </div>
+        </div>
+        <div class="config-row">
+          <label>Factory Reset Modbus</label>
+          <div class="config-actions">
+            <button class="btn btn-danger" data-cmd="m7" data-confirm="Reset Modbus to factory defaults? This will restart the device.">Reset Modbus Defaults</button>
+          </div>
+        </div>
+      </div>
+      <div class="cfg-status" id="cfg-status-modbus"></div>
+    </section>
+
+    <!-- RTC / AutoWash Menu (r) -->
+    <section class="config-section">
+      <h2>RTC &amp; AutoWash Settings <span class="menu-key">key: r</span></h2>
+      <div class="config-grid">
+        <div class="config-row">
+          <label>Set Date &amp; Time</label>
+          <div class="config-actions config-datetime">
+            <input type="number" id="cfg-tz" placeholder="Timezone (e.g. -8)" min="-12" max="14" />
+            <input type="number" id="cfg-year" placeholder="Year" min="2000" max="2100" />
+            <input type="number" id="cfg-month" placeholder="Month (1-12)" min="1" max="12" />
+            <input type="number" id="cfg-day" placeholder="Day (1-31)" min="1" max="31" />
+            <input type="number" id="cfg-hour" placeholder="Hour (0-23)" min="0" max="23" />
+            <input type="number" id="cfg-minute" placeholder="Minute (0-59)" min="0" max="59" />
+            <button class="btn btn-cfg" id="cfg-setDateTime">Set Date &amp; Time</button>
+          </div>
+        </div>
+        <div class="config-row">
+          <label>Timezone Only</label>
+          <div class="config-actions">
+            <input type="number" id="cfg-tzOnly" placeholder="Timezone (e.g. -8)" min="-12" max="14" />
+            <button class="btn btn-cfg" id="cfg-setTzOnly">Set Timezone</button>
+          </div>
+        </div>
+        <div class="config-row">
+          <label>AutoWash Hours (hour 25 = disabled)</label>
+          <div class="config-actions">
+            <input type="number" id="cfg-washHour1" placeholder="1st Hour (0-23 or 25)" min="0" max="25" />
+            <input type="number" id="cfg-washHour2" placeholder="2nd Hour (0-23 or 25)" min="0" max="25" />
+            <input type="number" id="cfg-washHour3" placeholder="3rd Hour (0-23 or 25)" min="0" max="25" />
+            <button class="btn btn-cfg" id="cfg-setWashHours">Set Wash Hours</button>
+          </div>
+        </div>
+        <div class="config-row">
+          <label>Wash Duration (seconds, 0–900)</label>
+          <div class="config-actions">
+            <input type="number" id="cfg-washSecs" placeholder="e.g. 5" min="0" max="900" />
+            <button class="btn btn-cfg" id="cfg-setWashSecs">Set Wash Seconds</button>
+          </div>
+        </div>
+        <div class="config-row">
+          <label>Skip-Wash Freezing Threshold (°C, −40 to 5)</label>
+          <div class="config-actions">
+            <input type="number" id="cfg-freezeC" placeholder="e.g. 4" min="-40" max="5" />
+            <button class="btn btn-cfg" id="cfg-setFreeze">Set Threshold</button>
+          </div>
+        </div>
+        <div class="config-row">
+          <label>Liquid Level Sensor Output</label>
+          <div class="config-actions">
+            <button class="btn btn-cfg" data-cmd="r8" data-confirm="Toggle LLS output type? (LOW IN AIR ↔ HIGH IN AIR)">Toggle LLS Output Type</button>
+          </div>
+        </div>
+      </div>
+      <div class="cfg-status" id="cfg-status-rtc"></div>
+    </section>
+
+    <!-- WiFi Menu (w) -->
+    <section class="config-section">
+      <h2>WiFi Settings <span class="menu-key">key: w</span></h2>
+      <div class="config-grid">
+        <div class="config-row">
+          <label>WiFi Mode</label>
+          <div class="config-actions">
+            <button class="btn btn-cfg" data-cmd="w1" data-confirm="Turn ON WiFi mode? Device will restart and you must enter WiFi credentials.">Turn ON WiFi</button>
+            <button class="btn btn-cfg" data-cmd="w2" data-confirm="Turn OFF WiFi mode? Device will restart.">Turn OFF WiFi</button>
+          </div>
+        </div>
+      </div>
+      <div class="cfg-status" id="cfg-status-wifi"></div>
+    </section>
+
+    <!-- Maintenance -->
+    <section class="config-section">
+      <h2>Maintenance</h2>
+      <div class="config-grid">
+        <div class="config-row">
+          <label>Set Serial Number (1–9999)</label>
+          <div class="config-actions">
+            <input type="number" id="cfg-sn" placeholder="Serial Number" min="1" max="9999" />
+            <button class="btn btn-cfg" id="cfg-setSN">Set Serial Number</button>
+          </div>
+        </div>
+        <div class="config-row">
+          <label>Empty Tank (run pump 15 min)</label>
+          <div class="config-actions">
+            <button class="btn btn-danger" data-cmd="E" data-confirm="Run pump for 15 minutes to empty tank?">Empty Tank</button>
+          </div>
+        </div>
+        <div class="config-row">
+          <label>Factory Reset ALL Settings</label>
+          <div class="config-actions">
+            <button class="btn btn-danger" data-cmd="F" data-confirm="Reset ALL settings to factory defaults? Device will restart.">Factory Reset All</button>
+          </div>
+        </div>
+      </div>
+      <div class="cfg-status" id="cfg-status-maintenance"></div>
+    </section>
+
+    <!-- Raw Command -->
+    <section class="config-section">
+      <h2>Raw Command</h2>
+      <p class="config-note">Send any character or string directly to the device serial port.</p>
+      <div class="config-row">
+        <div class="config-actions">
+          <input type="text" id="cfg-rawCmd" placeholder="Type command..." maxlength="256" />
+          <button class="btn btn-cfg" id="cfg-sendRaw">Send</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Config response console -->
+    <section class="config-section">
+      <h2>Device Response</h2>
+      <div class="log-container config-console" id="configConsole"></div>
+      <button class="btn btn-secondary" id="clearConfigConsole" style="margin-top:0.5rem;">Clear</button>
+    </section>
+  </div>
+
+  <script src="parser.js"></script>
+  <script src="serial.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="config.js"></script>
+</body>
+</html>

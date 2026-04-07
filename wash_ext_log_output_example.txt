@@ -1,0 +1,256 @@
+NEAR VERY START OF CODE / LOGGIN after a soft reset (there is a button for that)
+0000005760 [app] INFO: SHT20 sensor found!
+0000005781 [app] INFO: Couldn't find RTC.
+0000005785 [app] INFO: Firmware Rev: 36
+0000005790 [app] INFO: Release Date: 2025-03-11
+0000005791 [app] INFO: Board and revision: WEC:A8 P2
+0000005807 [app] INFO: device ID: 0a10aced202194944a03349c
+0000005822 [app] INFO: Serial Number: WE3-00
+0000005831 [app] INFO: EEPROM Ver: 7, #Washes: 0, #Modbusfails: 0
+0000005848 [app] INFO: Modbus Settings:
+0000005859 [app] INFO:   Slave Mode: OFF
+0000005869 [app] INFO:   Address/Channel: 43
+0000005881 [app] INFO:   Baud Rate: 19200
+0000005893 [app] INFO:   Config: 8,Even,1
+0000005904 [app] INFO: Liquid Level Sensor output type: LOW IN AIR
+0000005974 [app.measure] INFO: BATTERY VOLTAGE: 0.29
+0000006003 [app.measure] WARN: BATTERY VOLTAGE LOW
+0000007028 [app.measure] INFO: Monitoring some values...
+0000007809 [app.measure] INFO: TEMP: 27.1 C
+0000007825 [app.measure] INFO: TEMP (avg): 27.1 C
+0000008162 [app.measure] INFO: HUMIDITY: 33.7
+0000008178 [app.measure] INFO: HUMIDITY (avg): 33.7
+0000008797 [app.measure] INFO: LIQUID LEVEL SENSOR: 0.00
+0000008824 [app.measure] INFO: LIQUID LEVEL SENSOR (avg): 0.00
+0000008918 [app.measure] INFO: BATTERY VOLTAGE: 0.29
+0000008943 [app.measure] WARN: BATTERY VOLTAGE LOW
+0000010132 [app.measure] INFO: TEMP: 27.1 C
+0000010154 [app.measure] INFO: HUMIDITY: 33.4 %
+0000010177 [app.sched] INFO: Skip Wash Freezing Threshold: 4 C
+0000010207 [app.sched] INFO: Wash Seconds: 5 s
+0000010228 [app.sched] INFO: Wash schedule (hours): 25, 25, 25
+0000013358 [app] INFO: WiFi mode: OFF
+0000013376 [app.mb.master] INFO: Syncing with ARES for first time.
+0000014411 [app.mb.master] INFO: Trying to connect to ARES...
+0000014443 [app] INFO: Modbus master on Serial2
+0000019535 [app.mb.master] INFO: .
+0000025720 [app.mb.master] INFO: .
+0000031906 [app.mb.master] INFO: .
+0000038091 [app.mb.master] INFO: .
+0000041688 [app.mb.master] INFO: Polled successfully after 27.0 seconds
+0000041725 [app.mb.master] INFO: Registers after:
+0000000000000000000000000000000000000000000000000000f8ff0f2705003c000000044773 [app.mb.master] INFO: Successfully read from ARES Modbus Register.
+0000044806 [app.mb.master] INFO: Syncing WEC from ARES using the MODBUS register values.
+0000044980 [app.mb.slave] INFO: New timezone set, time is: Fri Dec 31 17:20:25 1999
+0000045020 [app.mb.master] INFO: 1999-12-31T17:20:25-08:00
+0000045050 [app.mb.master] INFO: Timezone: -8
+0000045074 [app.mb.master] INFO: ARES wake freq: 60 sec
+0000045100 [app.mb.master] INFO: Sync interval: 40 sec
+0000045127 [app.mb.master] INFO: OTA Test Mode: 0
+0000045151 [app.mb.master] INFO: Next wash time from ARES is in the past. Resetting to default.
+0000050399 [app.sched] INFO: 1999-12-31T17:20:30-08:00
+0000050425 [app.sched] INFO: Next wash occurs in: 3348277665 seconds, or 930077.12 hours
+0000050468 [app.sched] INFO: Time left to alert: 946689630
+0000050497 [app.sched] INFO: SCHEDULE >> ALERT_NOW
+0000050523 [app.mb.master] INFO: Trying to connect to ARES...
+0000050557 [app] INFO: Modbus master on Serial2
+0000050639 [app.mb.master] INFO: Polled successfully after 0.0 seconds
+0000050674 [app.mb.master] INFO: Registers after:
+0000000000000000000000000000000000000000000000000000f8ff0f2705003c000000053734 [app.mb.master] INFO: Successfully read from ARES Modbus Register.
+0000054021 [app.sched] INFO: 1999-12-31T17:20:34-08:00
+0000054049 [app.sched] INFO: Next wash occurs in: 3348277661 seconds, or 930077.12 hours
+0000054095 [app.sched] INFO: Time left to alert: 1
+0000054119 [app.sched] INFO: SCHEDULE >> NONE
+0000054141 [app.measure] INFO: Monitoring some values...
+0000054939 [app.measure] INFO: TEMP: 27.0 C
+0000054961 [app.measure] INFO: TEMP (avg): 27.0 C
+0000055315 [app.measure] INFO: HUMIDITY: 35.9
+0000055338 [app.measure] INFO: HUMIDITY (avg): 35.9
+0000055962 [app.measure] INFO: LIQUID LEVEL SENSOR: 0.00
+0000055990 [app.measure] INFO: LIQUID LEVEL SENSOR (avg): 0.00
+0000056087 [app.measure] INFO: BATTERY VOLTAGE: 0.28
+0000056115 [app.measure] WARN: BATTERY VOLTAGE LOW
+0000057141 [app.mb.master] INFO: Syncing up with ARES (Standard).
+0000057172 [app.mb.master] INFO: Trying to connect to ARES...
+0000057201 [app] INFO: Modbus master on Serial2
+0000057278 [app.mb.master] INFO: Polled successfully after 0.0 seconds
+0000057313 [app.mb.master] INFO: Registers after:
+0000000000000000000000000000000000000000000000000000f8ff0f2705003c000000060370 [app.mb.master] INFO: Successfully read from ARES Modbus Register.
+0000060409 [app.mb.master] INFO: Syncing WEC from ARES using the MODBUS register values.
+0000060452 [app.mb.master] INFO: 1999-12-31T17:21:23-08:00
+0000060479 [app.mb.master] INFO: Timezone: -8
+0000060501 [app.mb.master] INFO: ARES wake freq: 60 sec
+0000060526 [app.mb.master] INFO: Sync interval: 40 sec
+0000060552 [app.mb.master] INFO: OTA Test Mode: 0
+0000060574 [app.mb.master] INFO: Next wash time from ARES is in the past. Resetting to default.
+0000060723 [app.sched] INFO: 1999-12-31T17:21:23-08:00
+0000060750 [app.sched] INFO: Next wash occurs in: 3348277612 seconds, or 930077.12 hours
+0000060794 [app.sched] INFO: Time left to alert: 50
+0000060820 [app.sched] INFO: SCHEDULE >> NONE
+0000060844 [app] INFO: Going into standby...
+0000060866 [app] INFO:
+0000102880 [app] INFO: Waking from standby...
+0000103054 [app.sched] INFO: 1999-12-31T17:22:05-08:00
+0000103082 [app.sched] INFO: Next wash occurs in: 3348277570 seconds, or 930077.06 hours
+0000103124 [app.sched] INFO: Time left to alert: 92
+0000103149 [app.sched] INFO: SCHEDULE >> NONE
+0000103170 [app.measure] INFO: Monitoring some values...
+0000103967 [app.measure] INFO: TEMP: 26.8 C
+0000103988 [app.measure] INFO: TEMP (avg): 27.0 C
+0000104343 [app.measure] INFO: HUMIDITY: 33.3
+0000104366 [app.measure] INFO: HUMIDITY (avg): 35.6
+0000104989 [app.measure] INFO: LIQUID LEVEL SENSOR: 0.00
+0000105018 [app.measure] INFO: LIQUID LEVEL SENSOR (avg): 0.00
+0000105109 [app.measure] INFO: BATTERY VOLTAGE: 0.28
+0000105135 [app.measure] WARN: BATTERY VOLTAGE LOW
+0000106161 [app.mb.master] INFO: Syncing up with ARES (Standard).
+0000106188 [app.mb.master] INFO: Trying to connect to ARES...
+0000106213 [app] INFO: Modbus master on Serial2
+0000106290 [app.mb.master] INFO: Polled successfully after 0.0 seconds
+0000106317 [app.mb.master] INFO: Registers after:
+0000000000000000000000000000000000000000000000000000f8ff0f2705003c000000109368 [app.mb.master] INFO: Successfully read from ARES Modbus Register.
+0000109406 [app.mb.master] INFO: Syncing WEC from ARES using the MODBUS register values.
+0000109450 [app.mb.master] INFO: 1999-12-31T17:21:29-08:00
+0000109480 [app.mb.master] INFO: Timezone: -8
+0000109503 [app.mb.master] INFO: ARES wake freq: 60 sec
+0000109529 [app.mb.master] INFO: Sync interval: 40 sec
+0000109555 [app.mb.master] INFO: OTA Test Mode: 0
+0000109579 [app.mb.master] INFO: Next wash time from ARES is in the past. Resetting to default.
+0000109728 [app.sched] INFO: 1999-12-31T17:21:29-08:00
+0000109754 [app.sched] INFO: Next wash occurs in: 3348277606 seconds, or 930077.12 hours
+0000109799 [app.sched] INFO: Time left to alert: 56
+0000109822 [app.sched] INFO: SCHEDULE >> NONE
+0000109844 [app] INFO: Going into standby...
+0000109865 [app] INFO:
+0000151878 [app] INFO: Waking from standby...
+0000152052 [app.sched] INFO: 1999-12-31T17:22:11-08:00
+0000152078 [app.sched] INFO: Next wash occurs in: 3348277564 seconds, or 930077.06 hours
+0000152125 [app.sched] INFO: Time left to alert: 98
+0000152150 [app.sched] INFO: SCHEDULE >> NONE
+0000152173 [app.measure] INFO: Monitoring some values...
+0000152969 [app.measure] INFO: TEMP: 26.7 C
+0000152990 [app.measure] INFO: TEMP (avg): 26.9 C
+0000153333 [app.measure] INFO: HUMIDITY: 34.3
+0000153357 [app.measure] INFO: HUMIDITY (avg): 35.5
+0000153981 [app.measure] INFO: LIQUID LEVEL SENSOR: 0.00
+0000154008 [app.measure] INFO: LIQUID LEVEL SENSOR (avg): 0.00
+0000154100 [app.measure] INFO: BATTERY VOLTAGE: 0.28
+0000154126 [app.measure] WARN: BATTERY VOLTAGE LOW
+0000155152 [app.mb.master] INFO: Syncing up with ARES (Standard).
+0000155184 [app.mb.master] INFO: Trying to connect to ARES...
+0000155213 [app] INFO: Modbus master on Serial2
+0000155292 [app.mb.master] INFO: Polled successfully after 0.0 seconds
+0000155326 [app.mb.master] INFO: Registers after:
+0000000000000000000000000000000000000000000000000000f8ff0f2705003c000000158385 [app.mb.master] INFO: Successfully read from ARES Modbus Register.
+0000158423 [app.mb.master] INFO: Syncing WEC from ARES using the MODBUS register values.
+0000158467 [app.mb.master] INFO: 1999-12-31T17:22:18-08:00
+0000158495 [app.mb.master] INFO: Timezone: -8
+0000158517 [app.mb.master] INFO: ARES wake freq: 60 sec
+0000158543 [app.mb.master] INFO: Sync interval: 40 sec
+0000158569 [app.mb.master] INFO: OTA Test Mode: 0
+0000158593 [app.mb.master] INFO: Next wash time from ARES is in the past. Resetting to default.
+0000158740 [app.sched] INFO: 1999-12-31T17:22:18-08:00
+0000158767 [app.sched] INFO: Next wash occurs in: 3348277557 seconds, or 930077.06 hours
+0000158811 [app.sched] INFO: Time left to alert: 105
+0000158840 [app.sched] INFO: SCHEDULE >> NONE
+0000158862 [app] INFO: Going into standby...
+0000158884 [app] INFO:
+0000200899 [app] INFO: Waking from standby...
+0000201074 [app.sched] INFO: 1999-12-31T17:23:00-08:00
+0000201102 [app.sched] INFO: Next wash occurs in: 3348277515 seconds, or 930077.06 hours
+0000201147 [app.sched] INFO: Time left to alert: 147
+0000201174 [app.sched] INFO: SCHEDULE >> NONE
+0000201198 [app.measure] INFO: Monitoring some values...
+0000201997 [app.measure] INFO: TEMP: 26.7 C
+0000202017 [app.measure] INFO: TEMP (avg): 26.9 C
+0000202371 [app.measure] INFO: HUMIDITY: 34.0
+0000202394 [app.measure] INFO: HUMIDITY (avg): 35.4
+0000203019 [app.measure] INFO: LIQUID LEVEL SENSOR: 0.00
+0000203046 [app.measure] INFO: LIQUID LEVEL SENSOR (avg): 0.00
+0000203136 [app.measure] INFO: BATTERY VOLTAGE: 0.28
+0000203162 [app.measure] WARN: BATTERY VOLTAGE LOW
+0000204186 [app.mb.master] INFO: Syncing up with ARES (Standard).
+0000204217 [app.mb.master] INFO: Trying to connect to ARES...
+0000204251 [app] INFO: Modbus master on Serial2
+0000204329 [app.mb.master] INFO: Polled successfully after 0.0 seconds
+0000204362 [app.mb.master] INFO: Registers after:
+0000000000000000000000000000000000000000000000000000f8ff0f2705003c000000207416 [app.mb.master] INFO: Successfully read from ARES Modbus Register.
+0000207450 [app.mb.master] INFO: Syncing WEC from ARES using the MODBUS register values.
+0000207493 [app.mb.master] INFO: 1999-12-31T17:23:07-08:00
+0000207523 [app.mb.master] INFO: Timezone: -8
+0000207546 [app.mb.master] INFO: ARES wake freq: 60 sec
+0000207575 [app.mb.master] INFO: Sync interval: 40 sec
+0000207601 [app.mb.master] INFO: OTA Test Mode: 0
+0000207623 [app.mb.master] INFO: Next wash time from ARES is in the past. Resetting to default.
+0000207774 [app.sched] INFO: 1999-12-31T17:23:07-08:00
+0000207801 [app.sched] INFO: Next wash occurs in: 3348277508 seconds, or 930077.06 hours
+0000207845 [app.sched] INFO: Time left to alert: 154
+0000207868 [app.sched] INFO: SCHEDULE >> NONE
+0000207892 [app] INFO: Going into standby...
+0000207911 [app] INFO:
+0000249925 [app] INFO: Waking from standby...
+0000250100 [app.sched] INFO: 1999-12-31T17:23:49-08:00
+0000250127 [app.sched] INFO: Next wash occurs in: 3348277466 seconds, or 930077.06 hours
+0000250171 [app.sched] INFO: Time left to alert: 196
+0000250196 [app.sched] INFO: SCHEDULE >> NONE
+0000250218 [app.measure] INFO: Monitoring some values...
+0000251016 [app.measure] INFO: TEMP: 26.6 C
+0000251037 [app.measure] INFO: TEMP (avg): 26.9 C
+0000251392 [app.measure] INFO: HUMIDITY: 34.4
+0000251415 [app.measure] INFO: HUMIDITY (avg): 35.3
+0000252038 [app.measure] INFO: LIQUID LEVEL SENSOR: 0.00
+0000252066 [app.measure] INFO: LIQUID LEVEL SENSOR (avg): 0.00
+0000252154 [app.measure] INFO: BATTERY VOLTAGE: 0.27
+0000252180 [app.measure] WARN: BATTERY VOLTAGE LOW
+0000253206 [app.mb.master] INFO: Syncing up with ARES (Standard).
+0000253237 [app.mb.master] INFO: Trying to connect to ARES...
+0000253268 [app] INFO: Modbus master on Serial2
+0000253349 [app.mb.master] INFO: Polled successfully after 0.0 seconds
+0000253381 [app.mb.master] INFO: Registers after:
+0000000000000000000000000000000000000000000000000000f8ff0f2705003c000000256437 [app.mb.master] INFO: Successfully read from ARES Modbus Register.
+0000256474 [app.mb.master] INFO: Syncing WEC from ARES using the MODBUS register values.
+0000256515 [app.mb.master] INFO: 1999-12-31T17:23:57-08:00
+0000256543 [app.mb.master] INFO: Timezone: -8
+0000256566 [app.mb.master] INFO: ARES wake freq: 60 sec
+0000256592 [app.mb.master] INFO: Sync interval: 40 sec
+0000256620 [app.mb.master] INFO: OTA Test Mode: 0
+0000256647 [app.mb.master] INFO: Next wash time from ARES is in the past. Resetting to default.
+0000256791 [app.sched] INFO: 1999-12-31T17:23:57-08:00
+0000256817 [app.sched] INFO: Next wash occurs in: 3348277458 seconds, or 930077.06 hours
+0000256864 [app.sched] INFO: Time left to alert: 204
+0000256890 [app.sched] INFO: SCHEDULE >> NONE
+0000256911 [app] INFO: Going into standby...
+0000256932 [app] INFO:
+0000298946 [app] INFO: Waking from standby...
+0000299118 [app.sched] INFO: 1999-12-31T17:24:39-08:00
+0000299145 [app.sched] INFO: Next wash occurs in: 3348277416 seconds, or 930077.06 hours
+0000299193 [app.sched] INFO: Time left to alert: 246
+0000299225 [app.sched] INFO: SCHEDULE >> NONE
+0000299248 [app.measure] INFO: Monitoring some values...
+0000300046 [app.measure] INFO: TEMP: 26.6 C
+0000300069 [app.measure] INFO: TEMP (avg): 26.9 C
+0000300414 [app.measure] INFO: HUMIDITY: 36.6
+0000300436 [app.measure] INFO: HUMIDITY (avg): 35.4
+0000301063 [app.measure] INFO: LIQUID LEVEL SENSOR: 0.00
+0000301091 [app.measure] INFO: LIQUID LEVEL SENSOR (avg): 0.00
+0000301180 [app.measure] INFO: BATTERY VOLTAGE: 0.28
+0000301210 [app.measure] WARN: BATTERY VOLTAGE LOW
+0000302238 [app.mb.master] INFO: Syncing up with ARES (Standard).
+0000302270 [app.mb.master] INFO: Trying to connect to ARES...
+0000302301 [app] INFO: Modbus master on Serial2
+0000302375 [app.mb.master] INFO: Polled successfully after 0.0 seconds
+0000302408 [app.mb.master] INFO: Registers after:
+0000000000000000000000000000000000000000000000000000f8ff0f2705003c000000305464 [app.mb.master] INFO: Successfully read from ARES Modbus Register.
+0000305493 [app.mb.master] INFO: Syncing WEC from ARES using the MODBUS register values.
+0000305525 [app.mb.master] INFO: 1999-12-31T17:24:46-08:00
+0000305546 [app.mb.master] INFO: Timezone: -8
+0000305566 [app.mb.master] INFO: ARES wake freq: 60 sec
+0000305588 [app.mb.master] INFO: Sync interval: 40 sec
+0000305612 [app.mb.master] INFO: OTA Test Mode: 0
+0000305633 [app.mb.master] INFO: Next wash time from ARES is in the past. Resetting to default.
+0000305776 [app.sched] INFO: 1999-12-31T17:24:46-08:00
+0000305799 [app.sched] INFO: Next wash occurs in: 3348277409 seconds, or 930077.06 hours
+0000305837 [app.sched] INFO: Time left to alert: 253
+0000305858 [app.sched] INFO: SCHEDULE >> NONE
+0000305879 [app] INFO: Going into standby...
+0000305898 [app] INFO:
