@@ -2,6 +2,8 @@
 
 A browser-based configuration and diagnostic tool for the **Wash Extension Controller (WEC)** by [Fracsun LLC](https://fracsunllc.com). Connects directly to the device over USB serial using the [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) — no drivers, no software to install.
 
+**🔗 [Open the tool](https://fracsunllc.github.io/washext-test-tool/)** *(requires Chrome or Edge)*
+
 ---
 
 ## Requirements
