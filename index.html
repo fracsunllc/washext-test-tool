@@ -151,6 +151,24 @@
           </div>
         </div>
         <button class="btn btn-pump" id="runWashBtn" title="Sends 'g' to trigger pump and get measurement">Run Pump (g)</button>
+        <div style="margin-top: 1rem;"></div>
+        <div class="pump-repeat-row">
+          <select id="repeatIntervalSelect">
+            <option value="15">15 s</option>
+            <option value="30">30 s</option>
+            <option value="60">60 s</option>
+            <option value="120">2 min</option>
+            <option value="180">3 min</option>
+            <option value="300">5 min</option>
+            <option value="600">10 min</option>
+            <option value="900">15 min</option>
+            <option value="1800">30 min</option>
+            <option value="2700">45 min</option>
+            <option value="3600">1 hour</option>
+          </select>
+          <button class="btn btn-pump-repeat" id="repeatWashBtn">Start Auto-Pump</button>
+        </div>
+        <div class="pump-repeat-status" id="repeatWashStatus"></div>
       </div>
 
       <!-- Modbus -->

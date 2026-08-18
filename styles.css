@@ -91,6 +91,37 @@ header h1 {
 .btn-pump { background: var(--green); color: #fff; margin-top: 0.75rem; width: 100%; }
 .btn-pump:hover:not(:disabled) { filter: brightness(1.1); }
 .btn-pump:disabled { background: var(--bg3); }
+.pump-repeat-row {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  align-items: center;
+}
+.pump-repeat-row select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 0.82rem;
+  padding: 0.3rem 0.4rem;
+  flex-shrink: 0;
+}
+.btn-pump-repeat {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  flex: 1;
+}
+.btn-pump-repeat:hover:not(:disabled) { background: var(--border); }
+.btn-pump-repeat:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-pump-repeat.active { background: var(--yellow); color: #000; border-color: var(--yellow); }
+.btn-pump-repeat.active:hover { filter: brightness(1.1); }
+.pump-repeat-status {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+  min-height: 1em;
+}
 .btn-cfg  { background: var(--accent); color: #fff; }
 .btn-cfg:hover:not(:disabled) { background: var(--accent-hover); }
 .btn-danger { background: var(--red); color: #fff; }

@@ -117,7 +117,10 @@ const Dashboard = (() => {
     pumpVoltage: $('d-pumpVoltage'),
     pumpCurrent: $('d-pumpCurrent'),
     pumpPower:   $('d-pumpPower'),
-    runWashBtn:  $('runWashBtn'),
+    runWashBtn:     $('runWashBtn'),
+    repeatWashBtn:  $('repeatWashBtn'),
+    repeatInterval: $('repeatIntervalSelect'),
+    repeatStatus:   $('repeatWashStatus'),
 
     mbSlave:        $('d-mbSlave'),
     mbAddr:         $('d-mbAddr'),
@@ -406,6 +409,64 @@ const Dashboard = (() => {
     await Serial.send('g');
   });
 
+  // ── Repeat Pump button ────────────────────────────────────
+  let repeatTimer  = null;
+  let wakeLock     = null;
+
+  async function stopRepeat() {
+    clearInterval(repeatTimer);
+    repeatTimer = null;
+    if (wakeLock) { try { await wakeLock.release(); } catch (_) {} wakeLock = null; }
+    els.repeatWashBtn.textContent = 'Start Auto-Pump';
+    els.repeatWashBtn.classList.remove('active');
+    els.repeatStatus.textContent = '';
+    els.repeatInterval.disabled = false;
+  }
+
+  els.repeatWashBtn.addEventListener('click', async () => {
+    if (repeatTimer) { stopRepeat(); return; }
+    if (!Serial.isConnected()) { alert('Connect to a serial port first.'); return; }
+
+    const secs = parseInt(els.repeatInterval.value, 10);
+    if (secs > 60) {
+      const ok = window.confirm(
+        'This web application and tab must stay open to continually run the pump.\n' +
+        'Verify your computer will not sleep or lock the screen while this is running.'
+      );
+      if (!ok) return;
+    }
+
+    // Request wake lock so the screen stays on (same mechanism browsers use for video)
+    if ('wakeLock' in navigator) {
+      try { wakeLock = await navigator.wakeLock.request('screen'); } catch (_) {}
+    }
+
+    const label = els.repeatInterval.options[els.repeatInterval.selectedIndex].text;
+    els.repeatWashBtn.textContent = 'Stop Auto-Pump';
+    els.repeatWashBtn.classList.add('active');
+    els.repeatInterval.disabled = true;
+
+    let nextIn = secs;
+    const tick = () => {
+      els.repeatStatus.textContent = `Next pump in ${nextIn}s`;
+      nextIn--;
+      if (nextIn < 0) nextIn = secs;
+    };
+    tick();
+
+    // Fire immediately, then on each interval
+    await Serial.send('g');
+    repeatTimer = setInterval(async () => {
+      if (!Serial.isConnected()) { stopRepeat(); addEvent('Repeat pump stopped — disconnected', 'WARN'); return; }
+      nextIn--;
+      if (nextIn <= 0) {
+        nextIn = secs;
+        await Serial.send('g');
+      }
+      els.repeatStatus.textContent = `Next pump in ${nextIn}s`;
+    }, 1000);
+  });
+
   // ── Wire up Serial callbacks ──────────────────────────────
   Serial.onLineReceived(raw => {
     const { parsed, fields } = Parser.process(raw);
@@ -418,17 +479,21 @@ const Dashboard = (() => {
 
   Serial.onConnected(() => {
     els.runWashBtn.disabled = false;
+    els.repeatWashBtn.disabled = false;
     addEvent('Serial port connected', 'INFO');
   });
 
   Serial.onDisconnected(() => {
     els.runWashBtn.disabled = true;
+    els.repeatWashBtn.disabled = true;
+    stopRepeat();
     CmdStatus.unlockAll();
     addEvent('Serial port disconnected', 'WARN');
   });
 
-  // Initially disable pump button
+  // Initially disable pump buttons
   els.runWashBtn.disabled = true;
+  els.repeatWashBtn.disabled = true;
 
   return { applyFields, appendLog, addEvent };
 })();
